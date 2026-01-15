@@ -1,5 +1,5 @@
-export type Priority = 'High' | 'Medium' | 'Low';
-export type Status = 'Todo' | 'In Progress' | 'Done';
+export type Priority = "High" | "Medium" | "Low";
+export type Status = "Todo" | "In Progress" | "Done";
 
 export interface Task {
   id: string;
@@ -13,6 +13,19 @@ export interface Task {
   completedAt?: string; // ISO date string if Done
 }
 
+export type CreateTaskInput = {
+  title: string;
+  revenue: number;
+  timeTaken: number;
+  priority: Priority;
+  status: Status;
+  notes?: string;
+};
+
+export type UpdateTaskInput = {
+  id: string;
+} & Partial<CreateTaskInput>;
+
 export interface DerivedTask extends Task {
   roi: number | null; // null means N/A
   priorityWeight: 3 | 2 | 1;
@@ -24,7 +37,5 @@ export interface Metrics {
   timeEfficiencyPct: number; // 0..100
   revenuePerHour: number; // may be NaN/Infinity -> handle in UI
   averageROI: number; // average over valid ROI values
-  performanceGrade: 'Excellent' | 'Good' | 'Needs Improvement';
+  performanceGrade: "Excellent" | "Good" | "Needs Improvement";
 }
-
-
